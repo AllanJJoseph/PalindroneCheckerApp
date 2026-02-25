@@ -5,24 +5,11 @@ import java.util.Deque;
 import java.util.ArrayDeque;
 
 /**
- * --------------------------------------------------------
- * MAIN CLASS - PalindromeCheckerApp
- * --------------------------------------------------------
+ * PALINDROME CHECKER APPLICATION
  *
- * Description:
- * Demonstrates palindrome checking using multiple methods.
+ * UC1 - UC10 Implemented
  *
- * UC1 - Welcome
- * UC2 - Half Comparison
- * UC3 - Reverse String
- * UC4 - Char Array
- * UC5 - Stack
- * UC6 - Queue + Stack
- * UC7 - Deque
- * UC8 - Linked List
- * UC9 - Recursion
- *
- * @version 9.0
+ * Version : 10.0
  */
 
 public class PalindromeCheckerApp {
@@ -34,17 +21,13 @@ public class PalindromeCheckerApp {
 
         Node(char data) {
             this.data = data;
-            this.next = null;
         }
 
     }
 
     public static void main(String[] args) {
 
-        System.out.println("======================================");
-        System.out.println(" PALINDROME CHECKER APPLICATION");
-        System.out.println(" Version : 9.0");
-        System.out.println("======================================\n");
+        System.out.println("Palindrome Checker App Version 10.0\n");
 
         runUC1();
         runUC2();
@@ -55,117 +38,86 @@ public class PalindromeCheckerApp {
         runUC7();
         runUC8();
         runUC9();
+        runUC10();
 
     }
 
-    public static void runUC1() {
+    static void runUC1() {
 
-        System.out.println("UC1 Welcome");
+        System.out.println("UC1 Welcome\n");
 
     }
 
-    public static void runUC2() {
+    static void runUC2() {
 
-        String input="madam";
+        String s="madam";
 
         boolean result=true;
 
-        for(int i=0;i<input.length()/2;i++) {
-
-            if(input.charAt(i)!=input.charAt(input.length()-1-i)) {
-
+        for(int i=0;i<s.length()/2;i++)
+            if(s.charAt(i)!=s.charAt(s.length()-1-i))
                 result=false;
-                break;
 
-            }
-
-        }
-
-        System.out.println("UC2 Result: "+result);
+        System.out.println("UC2 : "+result);
 
     }
 
-    public static void runUC3() {
+    static void runUC3() {
 
-        String input="madam";
-        String reversed="";
+        String s="madam";
 
-        for(int i=input.length()-1;i>=0;i--) {
+        String rev="";
 
-            reversed+=input.charAt(i);
+        for(int i=s.length()-1;i>=0;i--)
+            rev+=s.charAt(i);
 
-        }
-
-        System.out.println("UC3 Result: "+input.equals(reversed));
+        System.out.println("UC3 : "+s.equals(rev));
 
     }
 
-    public static void runUC4() {
+    static void runUC4() {
 
-        String input="madam";
+        char[] arr="madam".toCharArray();
 
-        char[] arr=input.toCharArray();
-
-        int start=0;
-        int end=arr.length-1;
+        int start=0,end=arr.length-1;
 
         boolean result=true;
 
-        while(start<end) {
-
-            if(arr[start]!=arr[end]) {
-
+        while(start<end)
+            if(arr[start++]!=arr[end--])
                 result=false;
-                break;
 
-            }
-
-            start++;
-            end--;
-
-        }
-
-        System.out.println("UC4 Result: "+result);
+        System.out.println("UC4 : "+result);
 
     }
 
-    public static void runUC5() {
+    static void runUC5() {
 
-        String input="madam";
+        String s="madam";
 
         Stack<Character> stack=new Stack<>();
 
-        for(char c:input.toCharArray()) {
-
+        for(char c:s.toCharArray())
             stack.push(c);
-
-        }
 
         boolean result=true;
 
-        for(char c:input.toCharArray()) {
-
-            if(c!=stack.pop()) {
-
+        for(char c:s.toCharArray())
+            if(c!=stack.pop())
                 result=false;
-                break;
 
-            }
-
-        }
-
-        System.out.println("UC5 Result: "+result);
+        System.out.println("UC5 : "+result);
 
     }
 
-    public static void runUC6() {
+    static void runUC6() {
 
-        String input="madam";
+        String s="madam";
 
         Stack<Character> stack=new Stack<>();
         Queue<Character> queue=new LinkedList<>();
 
-        for(char c:input.toCharArray()) {
+        for(char c:s.toCharArray()) {
 
             stack.push(c);
             queue.add(c);
@@ -174,81 +126,58 @@ public class PalindromeCheckerApp {
 
         boolean result=true;
 
-        while(!stack.isEmpty()) {
-
-            if(stack.pop()!=queue.remove()) {
-
+        while(!stack.isEmpty())
+            if(stack.pop()!=queue.remove())
                 result=false;
-                break;
 
-            }
-
-        }
-
-        System.out.println("UC6 Result: "+result);
+        System.out.println("UC6 : "+result);
 
     }
 
-    public static void runUC7() {
+    static void runUC7() {
 
-        String input="madam";
+        String s="madam";
 
-        Deque<Character> deque=new ArrayDeque<>();
+        Deque<Character> dq=new ArrayDeque<>();
 
-        for(char c:input.toCharArray()) {
-
-            deque.addLast(c);
-
-        }
+        for(char c:s.toCharArray())
+            dq.add(c);
 
         boolean result=true;
 
-        while(deque.size()>1) {
-
-            if(deque.removeFirst()!=deque.removeLast()) {
-
+        while(dq.size()>1)
+            if(dq.removeFirst()!=dq.removeLast())
                 result=false;
-                break;
 
-            }
-
-        }
-
-        System.out.println("UC7 Result: "+result);
+        System.out.println("UC7 : "+result);
 
     }
 
-    public static void runUC8() {
+    static void runUC8() {
 
-        String input="madam";
+        String s="madam";
 
-        Node head=null;
-        Node tail=null;
+        Node head=null,tail=null;
 
-        for(char c:input.toCharArray()) {
+        for(char c:s.toCharArray()) {
 
-            Node newNode=new Node(c);
+            Node n=new Node(c);
 
-            if(head==null) {
-
-                head=newNode;
-                tail=newNode;
-
-            }
+            if(head==null)
+                head=tail=n;
 
             else {
 
-                tail.next=newNode;
-                tail=newNode;
+                tail.next=n;
+                tail=n;
 
             }
 
         }
 
-        Node slow=head;
-        Node fast=head;
+        Node slow=head,fast=head;
 
-        while(fast!=null && fast.next!=null) {
+        while(fast!=null&&fast.next!=null) {
 
             slow=slow.next;
             fast=fast.next.next;
@@ -256,55 +185,37 @@ public class PalindromeCheckerApp {
         }
 
         Node prev=null;
-        Node current=slow;
 
-        while(current!=null) {
+        while(slow!=null) {
 
-            Node next=current.next;
-            current.next=prev;
-            prev=current;
-            current=next;
+            Node next=slow.next;
+            slow.next=prev;
+            prev=slow;
+            slow=next;
 
         }
 
-        Node first=head;
-        Node second=prev;
+        Node first=head,second=prev;
 
         boolean result=true;
 
-        while(second!=null) {
-
-            if(first.data!=second.data) {
-
+        while(second!=null)
+            if(first.data!=second.data)
                 result=false;
-                break;
 
-            }
-
-            first=first.next;
-            second=second.next;
-
-        }
-
-        System.out.println("UC8 Result: "+result);
+        System.out.println("UC8 : "+result);
 
     }
 
-    /**
-     * UC9 Recursive Palindrome Checker
-     */
+    static void runUC9() {
 
-    public static void runUC9() {
+        String s="madam";
 
-        String input="madam";
-
-        boolean result=checkRecursive(input,0,input.length()-1);
-
-        System.out.println("UC9 Result: "+result);
+        System.out.println("UC9 : "+checkRec(s,0,s.length()-1));
 
     }
 
-    public static boolean checkRecursive(String s,int start,int end) {
+    static boolean checkRec(String s,int start,int end) {
 
         if(start>=end)
             return true;
@@ -312,7 +223,30 @@ public class PalindromeCheckerApp {
         if(s.charAt(start)!=s.charAt(end))
             return false;
 
-        return checkRecursive(s,start+1,end-1);
+        return checkRec(s,start+1,end-1);
+
+    }
+
+    /**
+     * UC10 Case Insensitive & Space Ignored
+     */
+
+    static void runUC10() {
+
+        String input="A man a plan a canal Panama";
+
+        String normalized=input
+                .replaceAll("[^a-zA-Z]","")
+                .toLowerCase();
+
+        boolean result=true;
+
+        for(int i=0;i<normalized.length()/2;i++)
+            if(normalized.charAt(i)!=normalized.charAt(normalized.length()-1-i))
+                result=false;
+
+        System.out.println("\nUC10 Input : "+input);
+        System.out.println("UC10 Result : "+result);
 
     }
 
