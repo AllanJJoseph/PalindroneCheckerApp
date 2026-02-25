@@ -1,4 +1,6 @@
 import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 /**
  * --------------------------------------------------------
@@ -18,6 +20,7 @@ import java.util.Stack;
  * UC3 - Palindrome Check Using String Reverse
  * UC4 - Character Array Based Palindrome Check
  * UC5 - Stack-Based Palindrome Checker
+ * UC6 - Queue + Stack Based Palindrome Check
  *
  * Concepts Covered:
  * - String handling
@@ -25,10 +28,11 @@ import java.util.Stack;
  * - Conditional statements
  * - Character arrays
  * - Two-pointer technique
- * - Stack (LIFO principle)
+ * - Stack (LIFO)
+ * - Queue (FIFO)
  *
  * @author YourName
- * @version 5.0
+ * @version 6.0
  */
 
 public class PalindromeCheckerApp {
@@ -37,13 +41,12 @@ public class PalindromeCheckerApp {
      * --------------------------------------------------------
      * MAIN METHOD
      * --------------------------------------------------------
-     * Entry point of the application.
      */
     public static void main(String[] args) {
 
         System.out.println("======================================");
         System.out.println("   PALINDROME CHECKER APPLICATION");
-        System.out.println("   Version : 5.0");
+        System.out.println("   Version : 6.0");
         System.out.println("======================================\n");
 
         runUC1();
@@ -51,6 +54,7 @@ public class PalindromeCheckerApp {
         runUC3();
         runUC4();
         runUC5();
+        runUC6();
     }
 
     /**
@@ -66,9 +70,8 @@ public class PalindromeCheckerApp {
 
     /**
      * --------------------------------------------------------
-     * UC2: Hardcoded Palindrome Check
+     * UC2: Hardcoded Palindrome Check (Half Comparison)
      * --------------------------------------------------------
-     * Logic: Compare first half of string with second half.
      */
     public static void runUC2() {
 
@@ -92,7 +95,6 @@ public class PalindromeCheckerApp {
      * --------------------------------------------------------
      * UC3: Palindrome Check Using String Reverse
      * --------------------------------------------------------
-     * Logic: Reverse string and compare using equals().
      */
     public static void runUC3() {
 
@@ -114,14 +116,12 @@ public class PalindromeCheckerApp {
      * --------------------------------------------------------
      * UC4: Character Array Based Palindrome Check
      * --------------------------------------------------------
-     * Logic: Convert to char[] and use two-pointer approach.
      */
     public static void runUC4() {
 
         System.out.println("---- UC4: Char Array Two-Pointer ----");
 
         String input = "madam";
-
         char[] characters = input.toCharArray();
 
         int start = 0;
@@ -145,10 +145,6 @@ public class PalindromeCheckerApp {
      * --------------------------------------------------------
      * UC5: Stack-Based Palindrome Checker
      * --------------------------------------------------------
-     * Logic:
-     * - Push characters into stack
-     * - Pop characters (reversed order)
-     * - Compare with original string
      */
     public static void runUC5() {
 
@@ -166,6 +162,38 @@ public class PalindromeCheckerApp {
 
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome: " + isPalindrome + "\n");
+    }
+
+    /**
+     * --------------------------------------------------------
+     * UC6: Queue + Stack Based Palindrome Check
+     * --------------------------------------------------------
+     */
+    public static void runUC6() {
+
+        System.out.println("---- UC6: Queue + Stack Based Palindrome Check ----");
+
+        String input = "madam";
+
+        Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));    // LIFO
+            queue.add(input.charAt(i));     // FIFO
+        }
+
+        boolean isPalindrome = true;
+
+        while (!stack.isEmpty()) {
+            if (!stack.pop().equals(queue.remove())) {
                 isPalindrome = false;
                 break;
             }
