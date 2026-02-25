@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /**
  * --------------------------------------------------------
  * MAIN CLASS - PalindromeCheckerApp
@@ -9,22 +11,24 @@
  * This application demonstrates multiple approaches
  * to checking whether a string is a palindrome.
  *
- * The following Use Cases are implemented:
+ * Implemented Use Cases:
  *
  * UC1 - Application Entry & Welcome Message
  * UC2 - Hardcoded Palindrome Check (Half Comparison)
  * UC3 - Palindrome Check Using String Reverse
  * UC4 - Character Array Based Palindrome Check
+ * UC5 - Stack-Based Palindrome Checker
  *
- * This project strengthens understanding of:
+ * Concepts Covered:
  * - String handling
  * - Loops
  * - Conditional statements
  * - Character arrays
  * - Two-pointer technique
+ * - Stack (LIFO principle)
  *
  * @author YourName
- * @version 4.0
+ * @version 5.0
  */
 
 public class PalindromeCheckerApp {
@@ -39,13 +43,14 @@ public class PalindromeCheckerApp {
 
         System.out.println("======================================");
         System.out.println("   PALINDROME CHECKER APPLICATION");
-        System.out.println("   Version : 4.0");
+        System.out.println("   Version : 5.0");
         System.out.println("======================================\n");
 
         runUC1();
         runUC2();
         runUC3();
         runUC4();
+        runUC5();
     }
 
     /**
@@ -96,7 +101,6 @@ public class PalindromeCheckerApp {
         String original = "madam";
         String reversed = "";
 
-        // Reverse using for loop
         for (int i = original.length() - 1; i >= 0; i--) {
             reversed = reversed + original.charAt(i);
         }
@@ -118,7 +122,6 @@ public class PalindromeCheckerApp {
 
         String input = "madam";
 
-        // Convert string to character array
         char[] characters = input.toCharArray();
 
         int start = 0;
@@ -132,6 +135,40 @@ public class PalindromeCheckerApp {
             }
             start++;
             end--;
+        }
+
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome: " + isPalindrome + "\n");
+    }
+
+    /**
+     * --------------------------------------------------------
+     * UC5: Stack-Based Palindrome Checker
+     * --------------------------------------------------------
+     * Logic:
+     * - Push characters into stack
+     * - Pop characters (reversed order)
+     * - Compare with original string
+     */
+    public static void runUC5() {
+
+        System.out.println("---- UC5: Stack-Based Palindrome Check ----");
+
+        String input = "madam";
+
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+        }
+
+        boolean isPalindrome = true;
+
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
         }
 
         System.out.println("Input: " + input);
