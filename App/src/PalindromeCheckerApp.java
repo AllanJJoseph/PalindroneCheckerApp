@@ -1,19 +1,20 @@
-import java.util.Stack;
-import java.util.Queue;
-import java.util.LinkedList;
-import java.util.Deque;
-import java.util.ArrayDeque;
+import java.util.*;
 
 /**
- * PALINDROME CHECKER APPLICATION
+ * --------------------------------------------------------
+ * MAIN CLASS - PalindromeCheckerApp
+ * --------------------------------------------------------
  *
- * UC1 - UC10 Implemented
+ * All Use Cases: UC1 to UC11
  *
- * Version : 10.0
+ * Version : 11.0
  */
 
 public class PalindromeCheckerApp {
 
+    /**
+     * Node for LinkedList (UC8)
+     */
     static class Node {
 
         char data;
@@ -27,7 +28,7 @@ public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        System.out.println("Palindrome Checker App Version 10.0\n");
+        System.out.println("Palindrome Checker App Version 11.0\n");
 
         runUC1();
         runUC2();
@@ -39,12 +40,13 @@ public class PalindromeCheckerApp {
         runUC8();
         runUC9();
         runUC10();
+        runUC11();
 
     }
 
     static void runUC1() {
 
-        System.out.println("UC1 Welcome\n");
+        System.out.println("UC1 Welcome");
 
     }
 
@@ -58,20 +60,19 @@ public class PalindromeCheckerApp {
             if(s.charAt(i)!=s.charAt(s.length()-1-i))
                 result=false;
 
-        System.out.println("UC2 : "+result);
+        System.out.println("UC2: "+result);
 
     }
 
     static void runUC3() {
 
         String s="madam";
-
         String rev="";
 
         for(int i=s.length()-1;i>=0;i--)
             rev+=s.charAt(i);
 
-        System.out.println("UC3 : "+s.equals(rev));
+        System.out.println("UC3: "+s.equals(rev));
 
     }
 
@@ -87,7 +88,7 @@ public class PalindromeCheckerApp {
             if(arr[start++]!=arr[end--])
                 result=false;
 
-        System.out.println("UC4 : "+result);
+        System.out.println("UC4: "+result);
 
     }
 
@@ -106,7 +107,7 @@ public class PalindromeCheckerApp {
             if(c!=stack.pop())
                 result=false;
 
-        System.out.println("UC5 : "+result);
+        System.out.println("UC5: "+result);
 
     }
 
@@ -130,7 +131,7 @@ public class PalindromeCheckerApp {
             if(stack.pop()!=queue.remove())
                 result=false;
 
-        System.out.println("UC6 : "+result);
+        System.out.println("UC6: "+result);
 
     }
 
@@ -149,7 +150,7 @@ public class PalindromeCheckerApp {
             if(dq.removeFirst()!=dq.removeLast())
                 result=false;
 
-        System.out.println("UC7 : "+result);
+        System.out.println("UC7: "+result);
 
     }
 
@@ -177,7 +178,7 @@ public class PalindromeCheckerApp {
 
         Node slow=head,fast=head;
 
-        while(fast!=null&&fast.next!=null) {
+        while(fast!=null && fast.next!=null) {
 
             slow=slow.next;
             fast=fast.next.next;
@@ -199,11 +200,17 @@ public class PalindromeCheckerApp {
 
         boolean result=true;
 
-        while(second!=null)
+        while(second!=null) {
+
             if(first.data!=second.data)
                 result=false;
 
-        System.out.println("UC8 : "+result);
+            first=first.next;
+            second=second.next;
+
+        }
+
+        System.out.println("UC8: "+result);
 
     }
 
@@ -211,7 +218,7 @@ public class PalindromeCheckerApp {
 
         String s="madam";
 
-        System.out.println("UC9 : "+checkRec(s,0,s.length()-1));
+        System.out.println("UC9: "+checkRec(s,0,s.length()-1));
 
     }
 
@@ -227,17 +234,11 @@ public class PalindromeCheckerApp {
 
     }
 
-    /**
-     * UC10 Case Insensitive & Space Ignored
-     */
-
     static void runUC10() {
 
         String input="A man a plan a canal Panama";
 
-        String normalized=input
-                .replaceAll("[^a-zA-Z]","")
-                .toLowerCase();
+        String normalized=input.replaceAll("[^a-zA-Z]","").toLowerCase();
 
         boolean result=true;
 
@@ -245,8 +246,51 @@ public class PalindromeCheckerApp {
             if(normalized.charAt(i)!=normalized.charAt(normalized.length()-1-i))
                 result=false;
 
-        System.out.println("\nUC10 Input : "+input);
-        System.out.println("UC10 Result : "+result);
+        System.out.println("UC10: "+result);
+
+    }
+
+    /**
+     * UC11 Object-Oriented Service
+     */
+
+    static void runUC11() {
+
+        PalindromeService service=new PalindromeService();
+
+        String input="madam";
+
+        boolean result=service.checkPalindrome(input);
+
+        System.out.println("UC11: "+result);
+
+    }
+
+}
+
+/**
+ * PalindromeService Class
+ * Encapsulates palindrome logic
+ */
+
+class PalindromeService {
+
+    public boolean checkPalindrome(String input) {
+
+        int start=0;
+        int end=input.length()-1;
+
+        while(start<end) {
+
+            if(input.charAt(start)!=input.charAt(end))
+                return false;
+
+            start++;
+            end--;
+
+        }
+
+        return true;
 
     }
 
